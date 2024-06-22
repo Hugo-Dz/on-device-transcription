@@ -1,0 +1,47 @@
+{
+	"name": "ratchet-desktop",
+	"version": "0.0.1",
+	"private": true,
+	"main": "src/electron/index.js",
+	"scripts": {
+		"dev": "vite dev",
+		"build:svelte": "vite build",
+		"preview": "vite preview",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch",
+		"pack": "electron-builder --dir",
+		"dev:electron": "electron --trace-warnings ./src/electron/index.js",
+		"build:electron": "electron-builder -m --config build.config.json",
+		"postinstall": "electron-builder install-app-deps",
+		"build": "npm run build:svelte && npm run build:electron"
+	},
+	"devDependencies": {
+		"@sveltejs/adapter-static": "^3.0.1",
+		"@sveltejs/kit": "^2.0.0",
+		"@sveltejs/vite-plugin-svelte": "^3.0.0",
+		"@types/eslint": "^8.56.0",
+		"autoprefixer": "^10.4.19",
+		"electron": "^30.0.3",
+		"electron-builder": "^24.13.3",
+		"eslint": "^8.56.0",
+		"eslint-config-prettier": "^9.1.0",
+		"eslint-plugin-svelte": "^2.36.0-next.4",
+		"postcss": "^8.4.38",
+		"prettier": "^3.1.1",
+		"prettier-plugin-svelte": "^3.1.2",
+		"svelte": "^4.2.7",
+		"svelte-check": "^3.6.0",
+		"tailwindcss": "^3.4.4",
+		"typescript": "^5.0.0",
+		"vite": "^5.0.3"
+	},
+	"type": "module",
+	"dependencies": {
+		"@ffmpeg/ffmpeg": "0.12.6",
+		"@ffmpeg/util": "^0.12.1",
+		"wavesurfer.js": "^7.7.15",
+		"@webgpu/types": "^0.1.40",
+		"vite-plugin-string": "^1.2.3",
+		"svelte-french-toast": "^1.0.3"
+	}
+}

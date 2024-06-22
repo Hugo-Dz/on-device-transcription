@@ -1,0 +1,16 @@
+{
+    "directories": {
+        "output": "dist"
+    },
+    "files": [
+        "package.json",
+        "src/electron/electron.cjs",
+        "src/electron/electron.cjs",
+        "src/electron/preload.cjs",
+        "src/electron/**/*",
+        {
+            "from": "build",
+            "to": ""
+        }
+    ]
+}

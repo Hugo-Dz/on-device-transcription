@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+	/* Hide scrollbar for Chrome, Safari, and Opera */
+	.no-scrollbar::-webkit-scrollbar {
+		display: none;
+	}
+
+	/* Hide scrollbar for IE, Edge, and Firefox */
+	.no-scrollbar {
+		-ms-overflow-style: none; /* IE and Edge */
+		scrollbar-width: none; /* Firefox */
+	}
+}
+
+@layer base {
+	@font-face {
+		font-family: "source-sans";
+		src: local("Source Sans"), local("Source Sans Pro"), url("/fonts/SourceSans.ttf");
+		font-weight: 400 500 600 700;
+		font-display: swap;
+	}
+}
