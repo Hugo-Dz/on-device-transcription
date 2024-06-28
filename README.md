@@ -7,6 +7,7 @@
 ### About
 
 A ready-to-use, minimal app that converts any speech into text, processed entirely locally using [Ratchet](https://github.com/huggingface/ratchet). You can deploy it as a website or build it as a desktop application.
+Try the web version [here](https://huggingface.co/spaces/HugoDzz/ratchet-demo).
 
 Important: This application requires access to the WebGPU API. If you're using it on the web, please ensure your browser supports WebGPU.
 
