@@ -244,7 +244,7 @@
 	<div class="w-[500px] h-full flex flex-col items-center justify-start">
 		<!-- Audio player -->
 		{#if blobURL && showSoundWave}
-			<SoundWave bind:this={soundWaveRef} {blobURL} />
+			<SoundWave bind:this={soundWaveRef} {blobURL} {segments}/> 
 		{/if}
 
 		{#if errorOccurred}
@@ -293,6 +293,7 @@
 					<div class="flex flex-col items-center space-y-3 h-[400px] overflow-y-scroll w-full overflow-x-hidden py-12">
 						{#each segments as segment, i}
 							<button
+                                id={`segment-${i}`}
 								class="w-full flex justify-center items-center"
 								on:mouseover={() => {
 									handleSegmentHover(segment);
