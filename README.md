@@ -23,8 +23,8 @@ Important: This application requires access to the WebGPU API. If you're using i
 - Clone the project.
 
 ```bash
-    git clone https://github.com/Hugo-Dz/ratchet-desktop-public.git
-    cd ratchet-desktop-public
+    git clone https://github.com/Hugo-Dz/on-device-transcription.git
+    cd on-device-transcription
 ```
 
 - Install the dependencies.
