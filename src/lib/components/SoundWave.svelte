@@ -9,6 +9,7 @@
 
 	// Props
 	export let blobURL: string;
+    export let segments: Segment[] = [];
 
 	// Variables
 	let waveSurfer: WaveSurfer | null = null;
@@ -16,6 +17,20 @@
 	let container: HTMLDivElement;
 	let isAudioPlaying = false;
 	let region: any;
+    let currentSegment: Segment | null = null;
+
+    
+	function findSegmentByTime(seconds: number): Segment | undefined {
+        return segments.find((segment) => segment.start <= seconds && segment.stop >= seconds);
+	}
+
+	function scrollToSegment(segment: Segment) {
+        let index = segments.indexOf(segment);
+		const segmentElement = document.querySelector(`#segment-${index}`); 
+		if (segmentElement) {
+			segmentElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+		}
+	}
 
 	onMount(() => {
 		waveSurfer = WaveSurfer.create({
@@ -27,6 +42,8 @@
 			url: blobURL,
 		});
 		regionPlugin = waveSurfer.registerPlugin(RegionsPlugin.create());
+
+        waveSurfer.on("timeupdate", scroll);
 
 		return () => {
 			waveSurfer?.destroy();
@@ -60,6 +77,14 @@
 			color: "hsla(400, 100%, 30%, 0.1)",
 		});
 	}
+
+    function scroll() {
+        let curSeg = findSegmentByTime(waveSurfer.getCurrentTime());
+        if (curSeg !== currentSegment) {
+            currentSegment = curSeg;
+            scrollToSegment(curSeg);
+        } 
+    }
 
 	export function clearRegions() {
 		if (!regionPlugin) return;
