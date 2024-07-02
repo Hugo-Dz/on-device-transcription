@@ -129,4 +129,4 @@
 </script>
 
 <!-- Main container -->
-<div bind:this={rootElement} class="w-[800px] h-[400px] flex mt-32"></div>
+<div bind:this={rootElement} class="w-[800px] h-[400px] flex"></div>

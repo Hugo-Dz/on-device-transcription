@@ -230,18 +230,20 @@
 </script>
 
 <!-- Main container -->
-<div class="flex flex-col justify-start items-center">
-	<!-- Title bar (Electron) -->
-	<div class="titleBar flex absolute top-0"></div>
+<div class="flex flex-col min-h-screen">
+    <!-- Title bar (Electron) -->
+	<div class="titleBar fixed top-0 w-full z-50"></div>
 
-	<!--- Title container -->
-	<div class="mt-12 space-x-2 flex flex-row justify-center items-end">
-		<img src="images/ratchet.png" alt="Ratchet logo" class="h-12" />
-		<img src="images/whisper.svg" alt="Whisper logo" class="h-8" />
-	</div>
+	<!-- Content wrapper -->
+	<div class="flex-grow flex flex-col">
+		<!--- Title container -->
+		<div class="mt-12 space-x-2 flex flex-row justify-center items-end w-full">
+			<img src="images/ratchet.png" alt="Ratchet logo" class="h-12" />
+			<img src="images/whisper.svg" alt="Whisper logo" class="h-8" />
+		</div>
 
-	<!-- Content container -->
-	<div class="w-[500px] h-full flex flex-col items-center justify-start">
+		<!-- Content container -->
+		<div class="flex-grow w-full max-w-[1200px] mx-auto px-4 pb-8 flex flex-col">
 		<!-- Audio player -->
 		{#if blobURL && showSoundWave}
 			<SoundWave bind:this={soundWaveRef} {blobURL} {segments}/> 
@@ -281,16 +283,18 @@
 					</div>
 				</div>
 			{:else if isGenerating}
-				<FancyLoading />
+                <div class="flex-grow flex items-center justify-center">
+					<FancyLoading />
+				</div>
 			{:else}
 				<!-- Results -->
-				<div class="relative w-full flex flex-col mt-8">
+				<div class="relative w-full flex flex-col mt-8 max-h-[50vh]">
 					<!-- Shadow top -->
 					<div
 						class="absolute top-0 left-0 w-full bg-gradient-to-b from-white to-transparent h-12 pointer-events-none"
 					></div>
 					<!-- Result segments -->
-					<div class="flex flex-col items-center space-y-3 h-[400px] overflow-y-scroll w-full overflow-x-hidden py-12">
+					<div class="flex flex-col items-center space-y-3 overflow-y-scroll w-full overflow-x-hidden py-12 leading-relaxed">
 						{#each segments as segment, i}
 							<button
                                 id={`segment-${i}`}
@@ -302,7 +306,9 @@
 								on:click={handlePlaySegment}
 								on:focus={() => {}}
 							>
+                            <sup class="text-slate-400 px-1">{segment.start.toFixed(2)}</sup>
 								<p class="text-2xl text-center">{segment.text}</p>
+                            <sup class="text-slate-400 px-1">{segment.stop.toFixed(2)}</sup>
 							</button>
 						{/each}
 					</div>
@@ -347,16 +353,18 @@
 			<BasicLoading percentage={loadingPercentage} />
 		{/if}
 	</div>
+	</div>
 
 	<!-- Credits -->
-	<div class="absolute bottom-6 flex flex-col items-center space-y-1 justify-center text-sm text-gray-500">
-		<p>
-			<a href="https://github.com/huggingface/ratchet" target="_blank" class="underline">Ratchet</a> is a toolkit to run
-			models on-device made by
-			<a href="https://fleetwood.dev/" target="_blank" class="underline">Christopher Fleetwood.</a>
-		</p>
-		<p>Built by <a href="https://www.hugoduprez.com/" target="_blank" class="underline">Hugo Duprez</a></p>
-	</div>
+	<footer class="w-full py-4 bg-white">
+		<div class="max-w-[1200px] mx-auto px-4 flex flex-col items-center space-y-1 justify-center text-sm text-gray-500">
+			<p>
+				<a href="https://github.com/huggingface/ratchet" target="_blank" class="underline">Ratchet</a> is a toolkit to run models on-device made by
+				<a href="https://fleetwood.dev/" target="_blank" class="underline">Christopher Fleetwood.</a>
+			</p>
+			<p>Built by <a href="https://www.hugoduprez.com/" target="_blank" class="underline">Hugo Duprez</a></p>
+		</div>
+	</footer>
 </div>
 
 <style>

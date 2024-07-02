@@ -35,8 +35,8 @@
 	onMount(() => {
 		waveSurfer = WaveSurfer.create({
 			container,
-			waveColor: "#000000",
-			progressColor: "#7F7F7F",
+			waveColor: "#7F7F7F",
+			progressColor: "#FF0000",
 			barWidth: 2,
 			barRadius: 100,
 			url: blobURL,
