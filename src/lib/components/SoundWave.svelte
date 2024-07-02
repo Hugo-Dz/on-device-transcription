@@ -17,7 +17,7 @@
 	let container: HTMLDivElement;
 	let isAudioPlaying = false;
 	let region: any;
-    let currentSegment: Segment | null = null;
+    let currentSegment: Segment | undefined = undefined;
 
     
 	function findSegmentByTime(seconds: number): Segment | undefined {
@@ -79,12 +79,14 @@
 	}
 
     function scroll() {
-        let curSeg = findSegmentByTime(waveSurfer.getCurrentTime());
-        if (curSeg !== currentSegment) {
-            currentSegment = curSeg;
-            scrollToSegment(curSeg);
-        } 
-    }
+		if (!waveSurfer) return;
+
+		const curSeg = findSegmentByTime(waveSurfer.getCurrentTime());
+		if (curSeg && curSeg !== currentSegment) {
+			currentSegment = curSeg;
+			scrollToSegment(curSeg);
+		}
+	}
 
 	export function clearRegions() {
 		if (!regionPlugin) return;
