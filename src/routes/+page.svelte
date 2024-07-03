@@ -119,6 +119,12 @@
 		if (!isffmpegLoaded) {
 			await loadFFMPEG();
 		}
+
+		let logStore = new Array();
+		ffmpeg.on("log", ({ type, message }) => {
+			logStore.push({ type, message });
+		});
+
 		await ffmpeg.writeFile("input", audioData);
 
 		const cmd = [
@@ -140,7 +146,13 @@
 			"output.pcm",
 		];
 
-		await ffmpeg.exec(cmd);
+		const exec_result = await ffmpeg.exec(cmd);
+		if (exec_result != 0) {
+			console.log("FFMPEG Error.");
+			logStore.forEach((log) => console.error(log));
+			return;
+		}
+
 		const data = (await ffmpeg.readFile("output.pcm")) as any;
 		blobURL = URL.createObjectURL(new Blob([data.buffer], { type: "audio/wav" }));
 		return data.buffer;
@@ -183,6 +195,10 @@
 			try {
 				const audioBytes = new Uint8Array(reader.result as ArrayBuffer);
 				const transcoded = await transcode(audioBytes);
+				if(!(transcoded instanceof ArrayBuffer)){
+						isGenerating = false;
+						return;
+				}
 				audioData = pcm16ToIntFloat32(transcoded);
 				blobURL = URL.createObjectURL(file);
 				result = await runModel();
