@@ -105,7 +105,7 @@
 		isffmpegLoaded = true;
 	}
 
-	function pcm16ToIntFloat32(pcmData: Uint8Array) {
+	function pcm16ToIntFloat32(pcmData: ArrayBuffer) {
 		let int16Array = new Int16Array(pcmData);
 		let float32Array = new Float32Array(int16Array.length);
 		for (let i = 0; i < int16Array.length; i++) {
